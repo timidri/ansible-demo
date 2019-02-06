@@ -1,0 +1,22 @@
+- hosts: centos
+  tasks:
+    - name: install ntp
+      yum:
+        name: ntp
+        state: present
+    - name: deploy ntp.conf
+      template:
+        src: ntp.conf.j2
+        dest: /etc/ntp.conf
+      notify:
+        - restart ntpd
+    - name: start ntpd service
+      service:
+        name: ntpd
+        state: started
+        enabled: yes
+  handlers:
+    - name: restart ntpd
+      service:
+        name: ntpd
+        state: restarted

@@ -1,0 +1,18 @@
+---
+- hosts: centos
+
+  tasks:
+    - name: copy file
+      copy:
+        src: template.j2
+        dest: /tmp/template.j2
+
+    - name: create file from template
+      template:
+        src: template.j2
+        dest: /tmp/myfile
+
+    - name: set file mode
+      file:
+        dest: /tmp/myfile
+        mode: 0741
