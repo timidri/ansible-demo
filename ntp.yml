@@ -1,5 +1,4 @@
 - hosts: centos
-  become: yes
   tasks:
     - name: install ntp
       yum:
